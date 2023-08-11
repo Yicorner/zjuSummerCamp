@@ -4,7 +4,7 @@ def parse():
     parser = argparse.ArgumentParser(description="一个简单的命令行参数示例")
     
     # 添加一个命令行参数
-    parser.add_argument('--stage', type=str, required=True, help="stage of the intermedia result, first or second or third or ")
+    parser.add_argument('--stage', type=str, required=True, help="stage of the intermedia result, first or second or third or origin")
     parser.add_argument('--num', type=int, required=False, help="number of batches, the test images, greater than 0, less than 10000")
     parser.add_argument('--batch_size', type=int, required=False, help="just batch_size, default is 100")
     parser.add_argument('--display_freq', type=int, required=False, help="display frequency, default is 1")
@@ -26,8 +26,8 @@ def check(args):
         args.display_freq = 1
     if(args.batch_size is None):
         args.batch_size = 100
-    if(args.stage != "first" and args.stage != "second" and args.stage != "third"):
-        print("stage must be first or second or third")
+    if(args.stage != "first" and args.stage != "second" and args.stage != "third" and args.stage != "origin"):
+        print("stage must be first or second or third or origin")
         exit()
     if(args.num is None):
         return

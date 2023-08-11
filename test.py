@@ -16,7 +16,7 @@ parser.add_argument('--image_name', type=str, required=True, help="pick a pictur
 # 解析命令行参数
 args = parser.parse_args()
 stage = args.stage
-image_path = "test_images/" + args.image_name + ".png"
+image_path = "Images/" + args.image_name + ".png"
 cifar10_dict = {
     0: "a airplane",
     1: "an automobile",

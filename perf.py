@@ -1,3 +1,4 @@
+import numpy as np
 import torch
 import torchvision
 from utils import queryUtils
@@ -125,6 +126,56 @@ if __name__ == "__main__":
         # draw the accuracy curve
         drawUtils.draw_all(loaded_data, dir_path, "second stage")
     
+    if(stage == "origin"):
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        set_stage(stage)
+        model, preprocess = CLIP.load("RN50", device=device)
+        
+        testset = torchvision.datasets.CIFAR10(root='./data', train=False,
+                                                download=False, transform=preprocess)
+
+        testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size,shuffle=False)   
+
+        dataiter = iter(testloader)
+
+        text = CLIP.tokenize(["an airplane", "an automobile", "a bird", 
+                            "a cat", "a deer", "a dog", "a frog", 
+                                "a horse", "a ship", "a truck"]).to(device)
+
+        with torch.no_grad():
+            # print(image_features.shape)
+            # print(image_features)
+            cnt = 0
+            true = 0
+        # 迭代数据集中的所有数据
+            while True:
+                try:
+                    # 获取下一个迭代器元素
+                    images, labels = next(dataiter)
+                    if(timer is not None):
+                        timer.start("origin stage clip time")
+                    logits_per_image, logits_per_text = model(images, text)
+                    if(timer is not None):
+                        timer.stop("origin stage clip time")
+                    probs = logits_per_image.softmax(dim=-1).cpu().numpy()
+                    max_indices = np.argmax(probs, axis=1)
+                    for i in range(len(max_indices)):
+                        if(max_indices[i] == labels[i]):
+                            true = true + 1
+                    cnt = cnt + 1
+                    if(cnt == num):
+                        break
+                    if(cnt * batch_size % args.display_freq == 0):
+                        print("num of predict true : ", true)
+                        print("number of tested images : ", cnt * batch_size)
+                except StopIteration:
+                    # 所有数据都已经被迭代过了
+                    break
+            print(f"*********you have tested {cnt * batch_size} images**************") # 所有数据都测试完了  
+            print(f"*********the total accuracy is {true / cnt * batch_size}**************")
+            if(timer is not None):
+                timer.report()
+                print("Segment: origin stage query time, Time elapsed: 0 seconds") # query time is 0
 
 
 
