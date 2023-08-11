@@ -6,10 +6,23 @@ import matplotlib.pyplot as plt
 import numpy as np
 from torchvision.transforms.transforms import CenterCrop, Resize, Compose, ToTensor
 import pinecone
+from .time_test import TestTime
 
 cnt = 0
 data_score_correct = []
 display_freq = 1
+timer = None
+Inference = False  # for test
+predict_result = 11
+
+
+def get_result():
+    return predict_result
+
+def set_timer(timer_):
+    global timer
+    timer = timer_
+    pass
 
 def show(img, label):
     npimg = img.numpy()
@@ -25,7 +38,7 @@ def _transform():
         ToTensor(),
     ])
 
-def add_into_pinecone(x, y, id : str, index):
+def add_into_pinecone(x, id:str, index, y=None):
     '''
     x: [3, 224, 224]
     y: [1]
@@ -50,7 +63,7 @@ def add_into_pinecone(x, y, id : str, index):
     print("add_into_pinecone success")
     pass
 
-def debatch(x, y, id : str, batch_index : int = 0):
+def debatch(x, y , id : str, batch_index : int = 0):
     # 这里需要保证index已经创建，否则会报错, 由于没钱，如果要创建index，需要先删除已有的index
     index = pinecone.Index("index-vec" + id)
     x = x.transpose(0, batch_index)
@@ -62,7 +75,10 @@ def debatch(x, y, id : str, batch_index : int = 0):
     batch_index: which dimension is batch_size
     '''
     for i in range(x.shape[0]):
-        add_into_pinecone(x[i], y[i], id, index)
+        if(Inference):
+            add_into_pinecone(x[i], id, index)
+        else:
+            add_into_pinecone(x[i], id, index, y[i])
     pass
 
 def query_accuracy(x, y, id : str, batch_index : int = 0):
@@ -80,10 +96,13 @@ def query_accuracy(x, y, id : str, batch_index : int = 0):
     index = pinecone.Index("index-vec" + id)
     x = x.transpose(0, batch_index)
     for i in range(x.shape[0]):
-        query_in_pinecone(x[i], y[i], id, index)
+        if(Inference):
+            query_in_pinecone(x[i], id, index)
+        else:
+            query_in_pinecone(x[i], id, index, y[i])
     pass
 
-def query_in_pinecone(x, y, id:str, index):
+def query_in_pinecone(x, id:str, index, y = None):
     '''
     we need the score, label, and metadata of the similar vector, 
     so we need to set include_values=True, include_metadata=True
@@ -99,8 +118,12 @@ def query_in_pinecone(x, y, id:str, index):
         top_k=1,
         include_values=True,
         include_metadata=True
-    )
+    )   
     data_score_correct.append([result['matches'][0]['score'], result['matches'][0]['metadata']['label'] == y])
+    if(Inference):
+        global predict_result
+        predict_result = result['matches'][0]['metadata']['label']
+        return
     global cnt
     cnt = cnt + 1
     if(cnt % display_freq == 0):

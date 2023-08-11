@@ -8,6 +8,12 @@ from torch import nn
 from utils import queryUtils
 
 stage = "first"
+timer = None
+
+def set_timer(timer_):
+    global timer
+    timer = timer_
+    pass
 
 def set_stage(s):
     global stage
@@ -77,8 +83,15 @@ class AttentionPool2d(nn.Module):
         x = torch.cat([x.mean(dim=0, keepdim=True), x], dim=0)  # (HW+1)NC
         x = x + self.positional_embedding[:, None, :].to(x.dtype)  # (HW+1)NC
         if(stage == "third"):
+            if(timer is not None):
+                timer.stop("third stage clip time")
+                timer.start("third stage query time")      
             mean_x = x.mean(dim=0, keepdim=False)
             queryUtils.query_accuracy(mean_x, labels, "5", 0)
+            if(timer is not None):
+                timer.start("third stage clip time")
+                timer.stop("third stage query time")   
+                
         x, _ = F.multi_head_attention_forward(
             query=x[:1], key=x, value=x,
             embed_dim_to_check=x.shape[-1],
@@ -159,8 +172,14 @@ class ModifiedResNet(nn.Module):
         x = self.layer2(x)
         x = self.layer3(x)
         if(stage == "second"):
+            if(timer is not None):
+                timer.stop("second stage clip time")
+                timer.start("second stage query time") 
             mean_x = x.mean(dim=(2, 3), keepdim=False)
             queryUtils.query_accuracy(mean_x, labels, "3", 0)
+            if(timer is not None):
+                timer.start("second stage clip time")
+                timer.stop("second stage query time")     
         x = self.layer4(x)
         x = self.attnpool(x, labels)
 
