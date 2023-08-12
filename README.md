@@ -73,9 +73,7 @@ Below are histograms representing data from the first, second, and third stages 
 
 ### Note on Testing:
 
-Due to the lengthy duration required to test all images, I have preemptively executed tests on all the images and saved the results under the directory: `./results/complete_result/`. For those interested in diving deeper into the methodologies and findings, the project paper is available as `paper.doc` in the aforementioned directory. 
-
-**Personal Remark**: The reason I've used a `.docx` format and not LaTeX for the paper is due to my unfamiliarity with the laTeX. I appreciate your understanding.
+Due to the lengthy duration required to test all images, I have preemptively executed tests on all the images and saved the results under the directory: `./results/complete_result/`. For those interested in diving deeper into the methodologies and findings, the project paper is available as `项目报告.pdf` in the aforementioned directory. 
 
 ## Join and Contribute
 
