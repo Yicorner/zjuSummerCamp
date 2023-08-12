@@ -10,7 +10,7 @@ A Try About Optimizing the CLIP image classification model based on similarity r
 
 2. **Navigate to the Project Directory**:
 
-`code cd zjuSummerCamp`
+`cd zjuSummerCamp`
 
 3. **Download CIFAR10 Dataset**:
 
