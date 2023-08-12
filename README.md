@@ -6,7 +6,7 @@ A Try About Optimizing the CLIP image classification model based on similarity r
 
 1. **Clone the Repository**:
 
-`git clone git@github.com:Yicorner/zjuSummerCamp.git`
+`git clone https://github.com/Yicorner/zjuSummerCamp.git`
 
 2. **Navigate to the Project Directory**:
 
