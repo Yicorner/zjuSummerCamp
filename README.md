@@ -65,9 +65,11 @@ for example:
 
 Below are histograms representing data from the first, second, and third stages respectively. Each figure's x-axis showcases the vector similarity—with higher values indicative of increased dissimilarity—while the y-axis delineates the count of classifications. Classifications are partitioned into correctly (depicted in red) and incorrectly (shown in blue) categorized.
 
-| First Stage  | Second Stage | Third Stage  |
-|:------------:|:------------:|:------------:|
-| ![Figure 1](<results/complete_result/first-stage/hist.png>) | ![Figure 2](<results/complete_result/second-stage/hist.png>) | ![Figure 3](<results/complete_result/third-stage/hist.png>) |
+|              | First Stage                                           | Second Stage                                             | Third Stage                                             |
+|:------------:|:-----------------------------------------------------:|:--------------------------------------------------------:|:-------------------------------------------------------:|
+| **Histogram**| ![Figure 1](results/complete_result/first-stage/hist.png) | ![Figure 2](results/complete_result/second-stage/hist.png) | ![Figure 3](results/complete_result/third-stage/hist.png) |
+| **Accuracy** | 35.39%                                                | 71.5%                                                     | 77.31%                                                  |
+
 
 ### Note on Testing:
 
