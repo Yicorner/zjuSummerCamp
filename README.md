@@ -65,17 +65,17 @@ for example:
 
 Below are histograms representing data from the first, second, and third stages respectively. Each figure's x-axis showcases the vector similarity—with higher values indicative of increased dissimilarity—while the y-axis delineates the count of classifications. Classifications are partitioned into correctly (depicted in red) and incorrectly (shown in blue) categorized.
 
-|              | First Stage                                           | Second Stage                                             | Third Stage                                             |
-|:------------:|:-----------------------------------------------------:|:--------------------------------------------------------:|:-------------------------------------------------------:|
-| **Histogram**| ![Figure 1](results/complete_result/first-stage/hist.png) | ![Figure 2](results/complete_result/second-stage/hist.png) | ![Figure 3](results/complete_result/third-stage/hist.png) |
-| **Accuracy** | 35.39%                                                | 71.5%                                                     | 77.31%                                                  |
-
+| Stage        | Histogram   | Accuracy  |
+|:------------:|:-----------:|:---------:|
+| First Stage  | ![Figure 1](results/complete_result/first-stage/hist.png) | 35.39% |
+| Second Stage | ![Figure 2](results/complete_result/second-stage/hist.png) | 71.5%  |
+| Third Stage  | ![Figure 3](results/complete_result/third-stage/hist.png)  | 77.31% |
 
 ### Note on Testing:
 
 Due to the lengthy duration required to test all images, I have preemptively executed tests on all the images and saved the results under the directory: `./results/complete_result/`. For those interested in diving deeper into the methodologies and findings, the project paper is available as `paper.doc` in the aforementioned directory. 
 
-**Personal Remark**: The reason I've used a `.docx` format and not LaTeX for the paper is due to my unfamiliarity with the latter. I appreciate your understanding.
+**Personal Remark**: The reason I've used a `.docx` format and not LaTeX for the paper is due to my unfamiliarity with the laTeX. I appreciate your understanding.
 
 ## Join and Contribute
 
