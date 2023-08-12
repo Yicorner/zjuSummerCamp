@@ -16,7 +16,7 @@ def draw_bar_plot(data, save_path,title):
     plt.xlabel('similarity scores')
     plt.title(f"Boxplot of {title} Data")
     plt.savefig(save_path)
-    # plt.show()
+    plt.show()
 
 def draw_hist(data, save_path,title):
     data_0 = [x[0] for x in data if x[1] == 0]
@@ -47,7 +47,7 @@ def draw_scatter_plot(data, save_path, title):
     plt.legend()
     plt.title(f"{title} Data Visualization")
     plt.savefig(save_path)
-    # plt.show()
+    plt.show()
     
 
 def draw_swarm_plot(data, save_path, title):
@@ -64,7 +64,7 @@ def draw_swarm_plot(data, save_path, title):
 
     # Show the plot
     plt.savefig(save_path)
-    # plt.show()
+    plt.show()
 
 def draw_all(data, save_path, title):
     draw_bar_plot(data, save_path + 'bar_plot.png',title)
