@@ -61,6 +61,20 @@ for example:
 - **--display_freq**: Determines the frequency of displaying intermediate results. Default is `1`.
 - **--time**: Toggle to measure the test time. Default is `False`.
 
+## Results
+
+Below are histograms representing data from the first, second, and third stages respectively. Each figure's x-axis showcases the vector similarity—with higher values indicative of increased dissimilarity—while the y-axis delineates the count of classifications. Classifications are partitioned into correctly (depicted in red) and incorrectly (shown in blue) categorized.
+
+| First Stage  | Second Stage | Third Stage  |
+|:------------:|:------------:|:------------:|
+| ![Figure 1](<results/complete_result/first-stage/hist.png>) | ![Figure 2](<results/complete_result/second-stage/hist.png>) | ![Figure 3](<results/complete_result/third-stage/hist.png>) |
+
+### Note on Testing:
+
+Due to the lengthy duration required to test all images, I have preemptively executed tests on all the images and saved the results under the directory: `./results/complete_result/`. For those interested in diving deeper into the methodologies and findings, the project paper is available as `paper.doc` in the aforementioned directory. 
+
+**Personal Remark**: The reason I've used a `.docx` format and not LaTeX for the paper is due to my unfamiliarity with the latter. I appreciate your understanding.
+
 ## Join and Contribute
 
 We welcome all contributors and enthusiasts. Dive into the project and enjoy!
