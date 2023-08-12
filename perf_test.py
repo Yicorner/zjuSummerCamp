@@ -11,6 +11,14 @@ import CLIP
 from CLIP.model import set_stage, stage, set_timer
 
 
+def PRINT(cnt, batch_size):
+    message = f"You have tested {cnt * batch_size} images"
+    separator_length = max(40, len(message) + 4)  # ensure at least 40 chars long or adjust as per your preference
+    separator = '=' * separator_length
+    print(separator)
+    print(message.center(separator_length))
+    print(separator)
+    
 if __name__ == "__main__":
     args = parse()
     stage = args.stage
@@ -54,7 +62,7 @@ if __name__ == "__main__":
                 except StopIteration:
                     # 所有数据都已经被迭代过了
                     break
-            print(f"*********you have tested {cnt * batch_size} images**************") # 所有数据都测试完了  
+            PRINT(cnt, batch_size)
             if(timer is not None):
                 timer.report()
                 print("Segment: first stage clip time, Time elapsed: 0 seconds") # CLIP time is 0
@@ -112,7 +120,8 @@ if __name__ == "__main__":
                 except StopIteration:
                     # 所有数据都已经被迭代过了
                     break
-            print(f"*********you have tested {cnt * batch_size} images**************") # 所有数据都测试完了  
+            PRINT(cnt, batch_size)
+
             if(timer is not None):
                 timer.report()
                 
@@ -171,8 +180,11 @@ if __name__ == "__main__":
                 except StopIteration:
                     # 所有数据都已经被迭代过了
                     break
-            print(f"*********you have tested {cnt * batch_size} images**************") # 所有数据都测试完了  
-            print(f"*********the total accuracy is {true / cnt * batch_size}**************")
+            PRINT(cnt, batch_size)
+
+            accuracy = true / (cnt * batch_size)
+            separator = "=" * 30  # adjust the number for a longer or shorter separator
+            print(f"{separator} Total Accuracy: {accuracy:.2%} {separator}")
             if(timer is not None):
                 timer.report()
                 print("Segment: origin stage query time, Time elapsed: 0 seconds") # query time is 0

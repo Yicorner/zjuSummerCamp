@@ -5,10 +5,10 @@ def parse():
     
     # 添加一个命令行参数
     parser.add_argument('--stage', type=str, required=True, help="stage of the intermedia result, first or second or third or origin")
-    parser.add_argument('--num', type=int, required=False, help="number of batches, the test images, greater than 0, less than 10000")
+    parser.add_argument('--num', type=int, required=False, help="number of batches. the num * bacth_size should greater than 0, less than 10000, default is all images")
     parser.add_argument('--batch_size', type=int, required=False, help="just batch_size, default is 100")
     parser.add_argument('--display_freq', type=int, required=False, help="display frequency, default is 1")
-    parser.add_argument('--time', type=bool, required=False, help="whether to measure the time of the intermedia result, default is False")
+    parser.add_argument('--time', type=bool, required=False, help="whether to measure the time of the test time, default is False")
     # 解析命令行参数
     args = parser.parse_args()
     check(args)

@@ -27,7 +27,7 @@ def draw_hist(data, save_path,title):
     plt.legend()
     plt.title("Histogram of Third Stage Data")
     plt.savefig(save_path)
-    # plt.show()
+    plt.show()
     
 
 def draw_scatter_plot(data, save_path, title):

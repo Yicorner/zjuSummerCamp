@@ -52,7 +52,7 @@ if(stage == "first" or stage =="all"):
     image = queryUtils._transform()(Image.open(image_path)).unsqueeze(0).to(device)
     queryUtils.query_accuracy(image, None, "0", 0)
     result = int(queryUtils.get_result())
-    print(f"third stage predict result : {cifar10_dict[result]}")
+    print(f"first stage predict result : {cifar10_dict[result]}")
         
 if(stage == "second" or stage =="all"):
     pinecone.init(api_key="31d26300-a53f-449d-b93f-f1a036b052bc", environment="us-west4-gcp-free")

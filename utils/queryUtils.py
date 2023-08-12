@@ -147,7 +147,9 @@ def cal_accuracy():
         data_score_correct[i][1] = int(data_score_correct[i][1])
         if(data_score_correct[i][1] == 1):
             correct = correct + 1
-    print(f"*********the total accuracy is {correct / len(data_score_correct)}**************")
+    accuracy = correct / len(data_score_correct)
+    separator = "=" * 30  # adjust the number for a longer or shorter separator
+    print(f"{separator} Total Accuracy: {accuracy:.2%} {separator}")
 
 def set_display_freq(freq):
     global display_freq
